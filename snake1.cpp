@@ -4,10 +4,11 @@
 #include<time.h>
 #include<Windows.h>
 
+//khởi tạo khung chơi
 #define consoleWidth 25
 #define consoleHeight 25
 
-
+//hàm xóa màn hình.
 void clrscr(void)
 {
 CONSOLE_SCREEN_BUFFER_INFO csbiInfo; 
@@ -23,6 +24,7 @@ csbiInfo.dwCursorPosition.X = 0;
 csbiInfo.dwCursorPosition.Y = 0; 
 SetConsoleCursorPosition(hConsoleOut,csbiInfo.dwCursorPosition); 
 }
+//hàm di chuyển đến vị trí con trỏ
 void gotoXY(short x,short y)
 {
 HANDLE hConsoleOutput;
@@ -32,7 +34,7 @@ SetConsoleCursorPosition(hConsoleOutput , Cursor_an_Pos);
 }
 
 using namespace std;
-enum TrangThai { up, down, left, right };
+enum TrangThai { up, down, left, right }; //lập danh sách trạng thái của rắn
 
 struct ToaDo
 {
@@ -50,7 +52,7 @@ struct HoaQua
 {
 	ToaDo td;
 };
-
+//khởi tạo màn chơi
 void KhoiTao(Snake &snake,HoaQua &hq)
 {
 	snake.n = 1;
@@ -65,6 +67,7 @@ void KhoiTao(Snake &snake,HoaQua &hq)
 void HienThi(Snake snake, HoaQua hq)
 {
 	clrscr();
+	// tạo viền 
 	for(int i=0;i<consoleHeight;i++)
 	{
 		gotoXY(consoleWidth,i);
@@ -83,13 +86,13 @@ void HienThi(Snake snake, HoaQua hq)
 
 void DieuKhien(Snake &snake)
 {
-	//trang thai cua tung dot
+	//trạng thái của từng đốt
 	for (int i = snake.n - 1; i > 0; i--)
 		snake.dot[i] = snake.dot[i - 1];
 	if (kbhit())
 	{
 		int key = _getch();
-		//dieu khien cai dau snake
+		//điều khiển đầu rắn
 		if (key == 'a' || key == 'A')
 			snake.tt = left;
 		else
