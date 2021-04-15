@@ -1,5 +1,5 @@
 ﻿ï»¿/*
-Project's name: Snake of Tuan
+Project's name: Snake SDL
 */
 #include "Header.h"
 
